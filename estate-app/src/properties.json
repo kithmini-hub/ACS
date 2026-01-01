@@ -1,0 +1,79 @@
+[
+  {
+    "id": "prop1",
+    "type": "House",
+    "bedrooms": 3,
+    "price": 450000,
+    "tenure": "Freehold",
+    "description": "Beautiful 3-bed house in a quiet area.",
+    "location": "NW1",
+    "added": {"month": "November", "day": 12, "year": 2025},
+    "picture": "img1.jpg"
+  },
+  {
+    "id": "prop2",
+    "type": "Flat",
+    "bedrooms": 2,
+    "price": 250000,
+    "tenure": "Leasehold",
+    "description": "Modern flat close to the station.",
+    "location": "BR1",
+    "added": {"month": "October", "day": 5, "year": 2025},
+    "picture": "img2.jpg"
+  },
+  {
+    "id": "prop3",
+    "type": "House",
+    "bedrooms": 4,
+    "price": 600000,
+    "tenure": "Freehold",
+    "description": "Large family home with garden.",
+    "location": "NW1",
+    "added": {"month": "December", "day": 1, "year": 2025},
+    "picture": "img3.jpg"
+  },
+  {
+    "id": "prop4",
+    "type": "Flat",
+    "bedrooms": 1,
+    "price": 180000,
+    "tenure": "Leasehold",
+    "description": "Cozy studio flat.",
+    "location": "SE10",
+    "added": {"month": "November", "day": 20, "year": 2025},
+    "picture": "img4.jpg"
+  },
+  {
+    "id": "prop5",
+    "type": "House",
+    "bedrooms": 5,
+    "price": 850000,
+    "tenure": "Freehold",
+    "description": "Luxury mansion.",
+    "location": "SW1",
+    "added": {"month": "September", "day": 15, "year": 2025},
+    "picture": "img5.jpg"
+  },
+  {
+    "id": "prop6",
+    "type": "Flat",
+    "bedrooms": 2,
+    "price": 320000,
+    "tenure": "Leasehold",
+    "description": "Stylish penthouse.",
+    "location": "BR1",
+    "added": {"month": "December", "day": 10, "year": 2025},
+    "picture": "img6.jpg"
+  },
+  {
+    "id": "prop7",
+    "type": "House",
+    "bedrooms": 3,
+    "price": 380000,
+    "tenure": "Freehold",
+    "description": "Charming cottage.",
+    "location": "NW3",
+    "added": {"month": "October", "day": 28, "year": 2025},
+    "picture": "img7.jpg"
+  }
+]

@@ -52,22 +52,20 @@ function SearchPage() {
           .filter(p => p.bedrooms >= minBed && p.bedrooms <= maxBed)
           .filter(p => p.location.startsWith(postcode))
           .map(p => (
-            <div key={p.id} className="house-card" style={{border: '1px solid #ccc', margin: '10px', padding: '15px', borderRadius: '8px', width: '300px', textAlign: 'left', backgroundColor: 'white'}}>
-              <h3>{p.type} - {p.location}</h3>
-              
-              {/* Image Gallery Item */}
-              <img 
-                src={`/images/${p.picture}`} 
-                alt={p.type} 
-                style={{width: '100%', height: '180px', objectFit: 'cover', borderRadius: '5px', marginBottom: '10px'}} 
-              />
-              
-              <p><strong>Price:</strong> £{p.price}</p>
-              <p><strong>Bedrooms:</strong> {p.bedrooms}</p>
-              <p style={{fontSize: '0.9rem', color: '#555'}}>{p.description}</p>
-              
-              {/* Link to Property Page */}
-              <Link to={`/property/${p.id}`}>
+            <Link to={`/property/${p.id}`} key={p.id} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="house-card" style={{border: '1px solid #ccc', margin: '10px', padding: '15px', borderRadius: '8px', width: '300px', textAlign: 'left', backgroundColor: 'white', cursor: 'pointer'}}>
+                <h3>{p.type} - {p.location}</h3>
+                
+                <img 
+                  src={`/images/${p.picture}`} 
+                  alt={p.type} 
+                  style={{width: '100%', height: '180px', objectFit: 'cover', borderRadius: '5px', marginBottom: '10px'}} 
+                />
+                
+                <p><strong>Price:</strong> £{p.price}</p>
+                <p><strong>Bedrooms:</strong> {p.bedrooms}</p>
+                <p style={{fontSize: '0.9rem', color: '#555'}}>{p.description.substring(0, 100)}...</p>
+                
                 <button style={{
                   backgroundColor: '#007bff', 
                   color: 'white', 
@@ -80,8 +78,8 @@ function SearchPage() {
                 }}>
                   View Details
                 </button>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
       </div>
     </div>

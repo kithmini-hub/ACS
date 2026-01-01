@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import properties from './properties.json';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 function SearchPage() {
   const [type, setType] = useState('Any');
@@ -55,6 +56,11 @@ function SearchPage() {
           .map(p => (
             <div key={p.id} className="house-card" style={{border: '1px solid black', margin: '10px', padding: '10px'}}>
               <h3>{p.type} - {p.location}</h3>
+              <img 
+              src={`/images/${p.picture}`} 
+              alt={p.type} 
+              style={{width: '100%', height: '200px', objectFit: 'cover', borderRadius: '5px', marginBottom: '10px'}} 
+/>
               <p>Price: £{p.price} | Bedrooms: {p.bedrooms}</p>
               <p>{p.description}</p>
             </div>

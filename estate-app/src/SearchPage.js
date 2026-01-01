@@ -63,11 +63,25 @@ function SearchPage() {
 />
               <p>Price: £{p.price} | Bedrooms: {p.bedrooms}</p>
               <p>{p.description}</p>
-            </div>
-          ))}
-      </div>
+              <Link to={`/property/${p.id}`}>
+              <button style={{
+                backgroundColor: '#007bff', 
+                color: 'white', 
+                border: 'none', 
+                padding: '10px 20px', 
+                borderRadius: '5px', 
+                cursor: 'pointer',
+                width: '100%',
+                marginTop: '10px'
+            }}>
+                View Details
+            </button>
+        </Link>
     </div>
-  );
+))}
+</div>
+</div>
+);
 }
 
 export default SearchPage;

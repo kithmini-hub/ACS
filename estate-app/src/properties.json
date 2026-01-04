@@ -8,7 +8,7 @@
     "description": "Beautiful 3-bed house in a quiet area.",
     "location": "NW1",
     "added": {"month": "November", "day": 12, "year": 2025},
-    "picture": "img1.jpg"
+    "picture": "house1.jpg"
   },
   {
     "id": "prop2",
@@ -19,7 +19,7 @@
     "description": "Modern flat close to the station.",
     "location": "BR1",
     "added": {"month": "October", "day": 5, "year": 2025},
-    "picture": "img2.jpg"
+    "picture": "flat1.jpg"
   },
   {
     "id": "prop3",
@@ -30,7 +30,7 @@
     "description": "Large family home with garden.",
     "location": "NW1",
     "added": {"month": "December", "day": 1, "year": 2025},
-    "picture": "img3.jpg"
+    "picture": "house2.jpg"
   },
   {
     "id": "prop4",
@@ -41,7 +41,7 @@
     "description": "Cozy studio flat.",
     "location": "SE10",
     "added": {"month": "November", "day": 20, "year": 2025},
-    "picture": "img4.jpg"
+    "picture": "flat2.jpg"
   },
   {
     "id": "prop5",
@@ -52,7 +52,7 @@
     "description": "Luxury mansion.",
     "location": "SW1",
     "added": {"month": "September", "day": 15, "year": 2025},
-    "picture": "img5.jpg"
+    "picture": "house3.jpg"
   },
   {
     "id": "prop6",
@@ -63,7 +63,7 @@
     "description": "Stylish penthouse.",
     "location": "BR1",
     "added": {"month": "December", "day": 10, "year": 2025},
-    "picture": "img6.jpg"
+    "picture": "flat3.jpg"
   },
   {
     "id": "prop7",
@@ -74,6 +74,6 @@
     "description": "Charming cottage.",
     "location": "NW3",
     "added": {"month": "October", "day": 28, "year": 2025},
-    "picture": "img7.jpg"
+    "picture": "house4.jpg"
   }
 ]

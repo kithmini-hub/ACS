@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import properties from '../properties.json'; // The ".." means look outside the pages folder
-import '../App.css'; // Updated path to find your CSS
+import properties from '../properties.json'; 
+import '../App.css'; 
 import { Link } from 'react-router-dom';
+import DatePicker from "react-datepicker"; 
+import "react-datepicker/dist/react-datepicker.css"; 
 
 function SearchPage() {
   const [type, setType] = useState('Any');
@@ -10,14 +12,19 @@ function SearchPage() {
   const [minBed, setMinBed] = useState(0);
   const [maxBed, setMaxBed] = useState(10);
   const [postcode, setPostcode] = useState('');
-  //add fave state
   const [favorites, setFavorites] = useState([]);
+  
+  // Changed to null to support the DatePicker widget properly
+  const [startDate, setStartDate] = useState(null); 
+  const [endDate, setEndDate] = useState(null);
+
   const addToFavorites = (e, property) => {
     e.preventDefault();
     if (!favorites.find(fav => fav.id === property.id)) {
       setFavorites([...favorites, property]);
     }
   };
+
   const removeFromFavorites = (id) => {
     setFavorites(favorites.filter(fav => fav.id !== id));
   };
@@ -46,74 +53,94 @@ function SearchPage() {
         <div>
           <label>Min Beds: </label>
           <input type="number" value={minBed} onChange={(e) => setMinBed(e.target.value)} />
-
           <label> Max Beds: </label>
           <input type="number" value={maxBed} onChange={(e) => setMaxBed(e.target.value)} />
-
           <label> Postcode: </label>
           <input type="text" value={postcode} onChange={(e) => setPostcode(e.target.value.toUpperCase())} />
+        </div>  
+
+        <div style={{ marginTop: '15px', borderTop: '1px solid #ccc', paddingTop: '10px', display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center' }}>
+          <label>Added After: </label>
+          <DatePicker 
+            selected={startDate} 
+            onChange={(date) => setStartDate(date)} 
+            placeholderText="Select start date"
+            isClearable 
+            className="react-widget-styled"
+          />
+          <label style={{ marginLeft: '10px' }}> Added Before: </label>
+          <DatePicker 
+            selected={endDate} 
+            onChange={(date) => setEndDate(date)} 
+            placeholderText="Select end date"
+            isClearable 
+            className="react-widget-styled"
+          />
         </div>
       </div>
 
-      {/* Results Display */}
-      {/* NEW ADD: This "wrapper" div creates the two columns */}
+      {/* Results and Favorites Wrapper */}
       <div style={{ display: 'flex', gap: '20px', padding: '20px', alignItems: 'flex-start' }}>
         
-        {/* COLUMN 1: Your Results */}
+        {/* COLUMN 1: Search Results */}
         <div style={{ flex: '3' }}>
           <h2>Search Results</h2>
           <div className="results-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-            {/* FILTERING LOGIC: We take the properties array and chain multiple .filter() methods */}
             {properties
               .filter(p => type === 'Any' || p.type === type)
               .filter(p => p.price >= minPrice && p.price <= maxPrice)
               .filter(p => p.bedrooms >= minBed && p.bedrooms <= maxBed)
               .filter(p => p.location.startsWith(postcode))
+              .filter(p => {
+                if (!startDate && !endDate) return true;
+                const propertyDate = new Date(`${p.added.month} ${p.added.day}, ${p.added.year}`);
+                const isAfter = !startDate || propertyDate >= startDate;
+                const isBefore = !endDate || propertyDate <= endDate;
+                return isAfter && isBefore;
+              })
               .map(p => (
-                <Link to={`/property/${p.id}`} key={p.id} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  {/* DRAGGABLE: enablin drag and store the property ID in the dataTransfer object */}
-                  <div className="house-card" draggable 
+                <div key={p.id} className="house-card" draggable 
                   onDragStart={(e) => e.dataTransfer.setData("id", p.id)}
                   style={{ border: '1px solid #ccc', margin: '10px', padding: '15px', borderRadius: '8px', width: '300px', textAlign: 'left', backgroundColor: 'white', cursor: 'pointer' }}>
+                  
+                  <Link to={`/property/${p.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <h3>{p.type} - {p.location}</h3>
                     <img src={`/images/${p.picture}`} alt={p.type} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '5px', marginBottom: '10px' }} />
                     <p><strong>Price:</strong> £{p.price}</p>
                     <p><strong>Bedrooms:</strong> {p.bedrooms}</p>
                     <p style={{ fontSize: '0.9rem', color: '#555' }}>{p.description.substring(0, 100)}...</p>
-                    
-                    <button style={{ backgroundColor: '#007bff', color: 'white', border: 'none', padding: '10px', borderRadius: '5px', width: '100%' }}>View Details</button>
-                    
-                    <button 
-                      onClick={(e) => addToFavorites(e, p)}
-                      style={{ width: '100%', marginTop: '5px', backgroundColor: '#ffc107', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
-                    >
-                       Add to Favorites
-                    </button>
-                  </div>
-                </Link>
+                    <button style={{ backgroundColor: '#007bff', color: 'white', border: 'none', padding: '10px', borderRadius: '5px', width: '100%', cursor: 'pointer' }}>View Details</button>
+                  </Link>
+
+                  <button 
+                    onClick={(e) => addToFavorites(e, p)}
+                    style={{ width: '100%', marginTop: '5px', backgroundColor: '#ffc107', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
+                  >
+                    Add to Favorites
+                  </button>
+                </div>
               ))}
           </div>
         </div>
-        {/* COLUMN 2: The Favorites Sidebar */}
+
+        {/* COLUMN 2: Favorites Sidebar */}
         <div 
-          onDragOver={(e) => e.preventDefault()} //preventDefault to allow a "drop" to happen
+          onDragOver={(e) => e.preventDefault()} 
           onDrop={(e) => {
-            const id = e.dataTransfer.getData("id"); // Retrieve the ID we "packed" during onDragStart
-            const property = properties.find(p => p.id === id); // Find the full house object using that ID
-            if (property) addToFavorites(e, property); // Add it to the favorites state
+            const id = e.dataTransfer.getData("id");
+            const property = properties.find(p => p.id === id);
+            if (property) addToFavorites(e, property);
           }}
           style={{ flex: '1', background: '#f9f9f9', padding: '15px', borderRadius: '10px', border: '2px dashed #ccc', minHeight: '400px' }}
         >
-          <h2> Favorites</h2>
+          <h2>Favorites</h2>
           
-          {/* Add "Clear All" bButtonj */}
           {favorites.length > 0 && (
-            <button onClick={() => setFavorites([])} style={{marginBottom: '10px', cursor: 'pointer'}}>
+            <button onClick={() => setFavorites([])} style={{marginBottom: '10px', cursor: 'pointer', background: '#ff4444', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '4px'}}>
               Clear All
             </button>
           )}
 
-          {/* If the array is empty, show text. Otherwise, .map() through favorites to display them */}
           {favorites.length === 0 ? <p>Your list is empty. Drag properties here!</p> : favorites.map(fav => (
             <div key={fav.id} style={{ background: 'white', padding: '10px', marginBottom: '10px', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', textAlign: 'left' }}>
               <h4 style={{ margin: '0' }}>{fav.type}</h4>
@@ -127,8 +154,7 @@ function SearchPage() {
             </div>
           ))}
         </div>
-
-      </div> {/* Closes the flex wrapper */}
+      </div>
     </div>
   );
 }

@@ -1,3 +1,142 @@
+/* ========== RESPONSIVE DESIGN (MEDIA QUERIES) ========== */
+
+/* Tablet and below (iPad landscape = 1024px) */
+@media (max-width: 1024px) {
+  .App {
+    padding: 10px;
+  }
+  
+  /* Stack favorites sidebar below results - targets the parent div with inline flex */
+  body .App > div > div[style*="display: flex"] {
+    flex-direction: column !important;
+  }
+  
+  /* Make property cards full width on tablet */
+  .house-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 10px 0 !important;
+  }
+  
+  /* Property page gallery - stack thumbnails */
+  .gallery-section > div {
+    flex-wrap: wrap !important;
+  }
+  
+  /* Make search container more compact */
+  .search-container {
+    padding: 15px;
+  }
+}
+
+/* Mobile (phones) */
+@media (max-width: 768px) {
+  /* Full width inputs on mobile */
+  .search-container input, 
+  .search-container select,
+  .react-datepicker-wrapper {
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  /* Stack navigation vertically - targets nav with inline styles */
+  nav[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 15px 20px !important;
+  }
+  
+  nav[style*="display: flex"] > div {
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100%;
+  }
+  
+  /* Property page adjustments - targets the main property div */
+  div[style*="padding: 40px"] {
+    padding: 20px 10px !important;
+  }
+  
+  /* Stack property page tabs vertically */
+  div[style*="borderBottom: 2px solid #ddd"] {
+    flex-direction: column !important;
+  }
+  
+  div[style*="borderBottom: 2px solid #ddd"] button {
+    width: 100% !important;
+    border-radius: 5px !important;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  
+  /* Make property images responsive */
+  img[style*="width: 100%"][style*="height: 400px"] {
+    height: 250px !important;
+  }
+  
+  /* Smaller thumbnails on mobile */
+  img[style*="width: 100px"] {
+    width: 80px !important;
+    height: 60px !important;
+  }
+  
+  /* Smaller text on mobile */
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+  }
+  
+  /* Make favorites sidebar less prominent on mobile */
+  div[style*="border: 2px dashed #ccc"] {
+    min-height: 200px !important;
+    padding: 10px !important;
+  }
+  
+  /* Adjust search container layout */
+  .search-container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .search-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+  .App {
+    padding: 5px;
+  }
+  
+  .search-container {
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 1.2rem;
+  }
+  
+  /* Make cards padding smaller */
+  .house-card {
+    padding: 10px !important;
+  }
+  
+  /* Smaller button text */
+  button {
+    font-size: 0.9rem;
+  }
+}
+
+/* ========== END RESPONSIVE DESIGN ========== */
+
 /* General Layout */
 .App {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -47,7 +186,7 @@
   position: sticky;
   top: 20px;
   background: #f8f9fa;
-  border: 2px dashed #007bff; /* Shows where to drop */
+  border: 2px dashed #007bff;
   transition: background 0.3s;
 }
 

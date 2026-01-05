@@ -90,18 +90,18 @@ function PropertyPage() {
           )}
 
           {activeTab === 'map' && (
-            <div style={{ width: '100%', height: '400px' }}>
-              <h3>Location</h3>
-              <iframe
-                title="Google Map"
-                width="100%"
-                height="350"
-                frameBorder="0"
-                style={{ border: 0, borderRadius: '8px' }}
-                src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY_HERE&q=${property.location}+London`}
-                allowFullScreen
-              ></iframe>
-              <p><small>* Note: Map requires an API key, or use a static image for the demo.</small></p>
+            <div style={{ textAlign: 'center' }}>
+              <h3>Location: {property.location}</h3>
+                <img 
+                  src={`/images/map-${property.id}.jpg`} 
+                  alt={`Map of ${property.location}`} 
+                  style={{ maxWidth: '100%', borderRadius: '8px', border: '1px solid #ddd' }}
+                  // Then add an error handle
+                  onError={(e) => { e.target.src = "https://via.placeholder.com/600x400?text=Map+Location+for+" + property.location; }}
+                />
+                <p style={{marginTop: '10px', fontSize: '0.9rem', color: '#666'}}>
+                  * Static map display for {property.location} area.
+                </p>
             </div>
           )}
         </div>
